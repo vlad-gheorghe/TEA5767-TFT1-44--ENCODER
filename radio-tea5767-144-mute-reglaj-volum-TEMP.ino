@@ -22,8 +22,8 @@ TFT_ILI9163C lcd = TFT_ILI9163C(__CS, __DC, 8);
 #define button_frequency_up     7
 #define button_frequency_down   6
 #define button_mute             5
-#define button_vplus             4
-#define button_vminus             2
+#define button_vplus             4 //VOLUM UP TDA7496L
+#define button_vminus             2 //VOLUM DOWN TDA7496L
 
 #define TEA5767_mute_left_right  0x06
 #define TEA5767_MUTE_FULL        0x80
@@ -80,7 +80,7 @@ digitalWrite(button_frequency_down, HIGH);
 digitalWrite(button_mute, HIGH);
 digitalWrite(button_vplus, HIGH);
 digitalWrite(button_vminus, HIGH);
-pinMode(3, OUTPUT);
+pinMode(3, OUTPUT); //FOR PWM TDA7496L
 
   analogWrite(3, 50);
   Wire.begin();
@@ -280,11 +280,9 @@ void show_volum_level(int h){
   byte xs=1;
   byte ys=125;
   for(int i=0;i<25;i++){
-   // if(i%2!=0)lcd.drawLine(xs+i,ys,xs+i,ys-i,h>=i?RED:BLACK);
+   
    if(i%2!=0)lcd.drawLine(xs+2*i,ys,xs+2*i,ys-i,h/10>=i?GREENYELLOW:BLACK);
-  // if(i%2!=0)lcd.drawLine(xs+2*i,ys,xs+2*i,ys-i,h/10>=i?RED:BLACK);
-  // if(i%2!=0)lcd.drawLine(xs+2*i,ys,xs+2*i,ys+i,h/10>=i?WHITE:BLACK);
-  // if(i%2!=0)lcd.drawLine(xs+i,ys+1,xs+i,ys+1,h/10>=i?WHITE:BLACK);
+  
   }
 }
 
